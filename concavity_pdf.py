@@ -2,7 +2,6 @@ import matplotlib
 matplotlib.use("Agg")
 from matplotlib import pyplot as plt
 import numpy as np
-import sys
 
 import pandas as pd
 import matplotlib.patches as mpatches
@@ -14,7 +13,7 @@ source_list = ['concavity_boot.csv','concavity_disorder.csv']
 
 bootDF = pd.read_csv(target+source_list[0])
 disorderDF = pd.read_csv(target+source_list[1])
-pdf = False
+pdf = True
 
 fig = plt.figure(1, figsize=(15,8))
 ax = fig.add_subplot(111)
@@ -22,36 +21,25 @@ ax = fig.add_subplot(111)
 x_Series = bootDF['concavity']
     
 #plt.scatter(x_Series,bootDF['full'],marker='.', c='b')
-plt.scatter(x_Series,disorderDF['full'],marker='o', c='b')
+#plt.scatter(x_Series,disorderDF['full'],marker='o', c='b')
 
 #plt.scatter(x_Series,bootDF['full-clip'],marker='.', c='y')
-plt.scatter(x_Series,disorderDF['full-clip'],marker='o', c='y')
+#plt.scatter(x_Series,disorderDF['full-clip'],marker='o', c='y')
 
 #plt.scatter(x_Series,bootDF['5000'],marker='.', c='r')
-plt.scatter(x_Series,disorderDF['5000'],marker='o', c='r')
+#plt.scatter(x_Series,disorderDF['5000'],marker='o', c='r')
 
 #plt.scatter(x_Series,bootDF['5000-clip'],marker='.', c='k')
-plt.scatter(x_Series,disorderDF['5000-clip'],marker='o', c='k')
+#plt.scatter(x_Series,disorderDF['5000-clip'],marker='o', c='k')
 
 #plt.ylim(ymin=0,ymax=100)
 
 #plt.scatter(x_Series,bootDF['reduction'],marker='.', c='b')
 #plt.scatter(x_Series,disorderDF['reduction'],marker='o', c='b')
 
-plt.xticks(x_Series)
-plt.ylabel("Basin Frequency", fontsize=16)
-plt.xlabel("Concavity",fontsize=16)   
-    
-legends = []
-    
-for colour,name in zip(['b','y','r','k'],['350m-unlimited elevation','350m-unlimited elevation GLIMS glaciation removed','350-5000m elevation','350-5000m elevation GLIMS glaciation removed']):
-    legend = mpatches.Patch(color=colour, label=name)
-    legends.append(legend)
-    
-plt.legend(handles=legends,title='Data Processing Levels')
+#plt.legend()
 
-fig.savefig(target+'concavity_distribution.png', bbox_inches='tight')
-sys.exit()
+#fig.savefig(target+'concavity_reduction.png', bbox_inches='tight')
 
 def seriesSum(Series):
     lister = Series.tolist()
@@ -122,4 +110,4 @@ for colour,name in zip(['b','y','r','k'],['350m-unlimited elevation','350m-unlim
     
 plt.legend(handles=legends,title='Data Processing Levels')
 
-fig.savefig('../concavity_distribution.png', bbox_inches='tight')
+fig.savefig('../concavity_pdf.png', bbox_inches='tight')

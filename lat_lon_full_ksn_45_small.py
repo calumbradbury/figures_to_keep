@@ -31,33 +31,30 @@ with open(target+'full_data.csv','r') as csvfile:
     pandasDF = pd.read_csv(csvfile,delimiter=',')
     #print pandasDF
     #pandasDF = pandasDF[pandasDF['burned_data'] > 0]
-    pandasDF = pandasDF[pandasDF['m_chi'] < 200]
-    #pandasDF = pandasDF[pandasDF['longitude'] > 85]
-    #pandasDF = pandasDF[pandasDF['longitude'] < 86]
-    #pandasDF = pandasDF[pandasDF['latitude'] > 28]
-    #pandasDF = pandasDF[pandasDF['latitude'] < 29]
+    #pandasDF = pandasDF[pandasDF[''] < 400]
+    pandasDF = pandasDF[pandasDF['longitude'] > 86.5]
+    pandasDF = pandasDF[pandasDF['longitude'] < 87]
+    pandasDF = pandasDF[pandasDF['latitude'] > 28.5]
+    pandasDF = pandasDF[pandasDF['latitude'] < 29]
     #pandasDF = pandasDF[pandasDF['distance_along'] < 1000]
     #pandasDF = pandasDF[pandasDF['distance_along'] > 150]    
     
     x_Series = pandasDF['longitude']
     y_Series = pandasDF['latitude']
     #print x_Series
-    weight = pandasDF['second_inv']
+    weight = pandasDF['m_chi']
     
-    fig = plt.figure(1, figsize=(18,9))
+    fig = plt.figure(1, figsize=(6,6))
     ax = fig.add_subplot(111)    
-    #ax.grid(color='k', linestyle='-', linewidth=2)
-    plt.scatter(x_Series,y_Series,marker=',',s=0.1, c=weight, cmap = cm.Reds)
+    plt.scatter(x_Series,y_Series,marker=',',s=1, c=weight, cmap = cm.terrain)
     plt.axes().set_aspect('equal', 'datalim')  
-    plt.xticks(range(76,96,1))
     plt.xlabel("Degrees Longitude")
     plt.ylabel("Degrees Latitude")
     
-    h = plt.colorbar(orientation = "horizontal",shrink=0.5)
-    #h.set_label(r'Elevation in Metres')
-    #h.set_label(r'$K_{sn}$')    
-    #h.set_label(r'Precipitation ($mm\,year^{-1}$)')
-    h.set_label(r'Strain ($10^{-9}year^{-1}$)')
+    #plt.xticks(range(76,96,1))
+    h = plt.colorbar()
+    h.set_label(r'$K_{sn}$')
+
     #plt.axes().set_aspect('equal', 'datalim')  
     
     
@@ -70,5 +67,5 @@ with open(target+'full_data.csv','r') as csvfile:
     #plt.axes().set_aspect('equal', 'datalim')                                               
     #plt.colorbar()
         
-    fig.savefig(target+'/lat_lon_full_data_0.4_0.4_strain_plot.png', bbox_inches='tight')
+    fig.savefig(target+'/lat_lon_full_data_0.4_small_ksn_plot.png', bbox_inches='tight')
  
